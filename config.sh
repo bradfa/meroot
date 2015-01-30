@@ -8,7 +8,7 @@
 #ARCH=mipsel
 
 # Locations for the cross compiler and resulting root file system
-CC_BASE_PREFIX=/opt/cross
+CC_BASE_PREFIX=/tmp/cross
 ROOTFS_BASE_PREFIX=/tmp/meroot
 
 # If you use arm, you may need more fine-tuning:
