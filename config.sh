@@ -26,3 +26,6 @@ MAKEFLAGS=-j8
 
 # Enable this to build the bootstrap gcc (thrown away) without optimization, to reduce build time
 GCC_STAGE1_NOOPT=1
+
+# Don't build C++ support
+LANG_CXX=no
