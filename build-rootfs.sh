@@ -4,11 +4,15 @@ set -ex
 
 . ./config.sh
 
-BUSYBOX_VERSION=1.23.1
-MAKE_VERSION=4.1
-
 # Get the full configuration
 . musl-cross/defs.sh
+
+BUSYBOX_VERSION=1.23.1
+MAKE_VERSION=4.1
+GMP_VERSION=6.0.0a
+MPFR_VERSION=3.1.2
+MPC_VERSION=1.0.2
+M4_VERSION=1.4.17
 
 PREFIX=$ROOTFS_BASE_PREFIX
 
