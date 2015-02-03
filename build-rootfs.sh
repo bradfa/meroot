@@ -135,3 +135,8 @@ buildinstall '' binutils-$BINUTILS_VERSION CC="$CC -static" LDFLAGS="-Wl,-static
 	--target=$TRIPLE --host=$TRIPLE \
 	--disable-nls --disable-werror \
 	--with-gmp=$PREFIX --with-mpfr=$PREFIX --with-mpc=$PREFIX
+
+# GNU Make (static linked)
+fetchextract http://ftp.gnu.org/gnu/make/ make-$MAKE_VERSION .tar.bz2
+buildinstall '' make-$MAKE_VERSION CFLAGS="-static" LDFLAGS="-static" \
+	--target=$TRIPLE --host=$TRIPLE --without-guile --disable-nls
