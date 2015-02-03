@@ -79,6 +79,10 @@ then
 	)
 fi
 
+# Change PREFIX to PREFIX/usr
+OLDPREFIX=$PREFIX
+PREFIX=$PREFIX/usr
+
 # Linux headers
 fetchextract $LINUX_HEADERS_URL
 LINUX_HEADERS_DIR=$(stripfileext $(basename $LINUX_HEADERS_URL))
@@ -94,7 +98,7 @@ if [ ! -e $LINUX_HEADERS_DIR/installedheaders ]
 then
     (
     cd $LINUX_HEADERS_DIR
-    make headers_install ARCH=$LINUX_ARCH INSTALL_HDR_PATH="$PREFIX/usr"
+    make headers_install ARCH=$LINUX_ARCH INSTALL_HDR_PATH="$PREFIX"
     touch installedheaders
     )
 fi
