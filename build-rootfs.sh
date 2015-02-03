@@ -131,10 +131,17 @@ buildinstall '' mpc-$MPC_VERSION --target=$TRIPLE --host=$TRIPLE \
 
 # Binutils (static linked)
 fetchextract http://ftp.gnu.org/gnu/binutils/ binutils-$BINUTILS_VERSION .tar.bz2
+# Store old MAKEFLAGS and override to prevent $TRIPLET naming in target
+OLDMAKEFLAGS=$MAKEFLAGS
+OLDMAKEINSTALLFLAGS=$MAKEINSTALLFLAGS
+MAKEFLAGS="$MAKEFLAGS tooldir=$PREFIX"
+MAKEINSTALLFLAGS=$MAKEFLAGS
 buildinstall '' binutils-$BINUTILS_VERSION CC="$CC -static" LDFLAGS="-Wl,-static" \
 	--target=$TRIPLE --host=$TRIPLE \
 	--disable-nls --disable-werror \
 	--with-gmp=$PREFIX --with-mpfr=$PREFIX --with-mpc=$PREFIX
+MAKEFLAGS=$OLDMAKEFLAGS
+MAKEINSTALLFLAGS=$OLDMAKEINSTALLFLAGS
 
 # GNU Make (static linked)
 fetchextract http://ftp.gnu.org/gnu/make/ make-$MAKE_VERSION .tar.bz2
