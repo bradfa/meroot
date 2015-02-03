@@ -152,3 +152,11 @@ buildinstall '' make-$MAKE_VERSION CFLAGS="-static" LDFLAGS="-static" \
 fetchextract http://ftp.gnu.org/gnu/m4/ m4-$M4_VERSION .tar.bz2
 buildinstall '' m4-$M4_VERSION LDFLAGS="-static" \
 	--target=$TRIPLE --host=$TRIPLE
+
+# GCC (static linked native)
+fetchextract http://ftp.gnu.org/gnu/gcc/ gcc-$GCC_VERSION .tar.bz2
+buildinstall '' gcc-$GCC_VERSION LDFLAGS="-static" \
+	--target=$TRIPLE --host=$TRIPLE --enable-languages=$LANGUAGES \
+	--disable-libmudflap --disable-libsanitizer --disable-nls --enable-shared \
+	--with-gmp=$PREFIX --with-mpfr=$PREFIX --with-mpc=$PREFIX \
+	$GCC_MULTILIB_CONFFLAGS $GCC_CONFFLAGS

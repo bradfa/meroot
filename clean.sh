@@ -9,6 +9,7 @@ rm -rf mpc-*
 rm -rf gmp-*
 rm -rf mpfr-*
 rm -rf binutils-*
+rm -rf gcc-*
 (
 cd "$PWD"/musl-cross
 . "$PWD"/clean.sh
