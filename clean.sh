@@ -8,6 +8,7 @@ rm -rf m4-*
 rm -rf mpc-*
 rm -rf gmp-*
 rm -rf mpfr-*
+rm -rf binutils-*
 (
 cd "$PWD"/musl-cross
 . "$PWD"/clean.sh

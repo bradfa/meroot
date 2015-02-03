@@ -13,6 +13,7 @@ GMP_VERSION=6.0.0
 MPFR_VERSION=3.1.2
 MPC_VERSION=1.0.2
 M4_VERSION=1.4.17
+BINUTILS_VERSION=2.25
 
 PREFIX=$ROOTFS_BASE_PREFIX
 
@@ -127,3 +128,10 @@ buildinstall '' mpfr-$MPFR_VERSION --target=$TRIPLE --host=$TRIPLE \
 fetchextract http://ftp.gnu.org/gnu/mpc/ mpc-$MPC_VERSION .tar.gz
 buildinstall '' mpc-$MPC_VERSION --target=$TRIPLE --host=$TRIPLE \
 	--disable-shared --with-pic --with-gmp=$PREFIX --with-mpfr=$PREFIX
+
+# Binutils (static linked)
+fetchextract http://ftp.gnu.org/gnu/binutils/ binutils-$BINUTILS_VERSION .tar.bz2
+buildinstall '' binutils-$BINUTILS_VERSION CC="$CC -static" LDFLAGS="-Wl,-static" \
+	--target=$TRIPLE --host=$TRIPLE \
+	--disable-nls --disable-werror \
+	--with-gmp=$PREFIX --with-mpfr=$PREFIX --with-mpc=$PREFIX
