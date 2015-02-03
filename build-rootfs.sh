@@ -40,8 +40,8 @@ mkdir -pv "$PREFIX"/var/local
 mkdir -pv "$PREFIX"/var/lock
 mkdir -pv "$PREFIX"/var/log
 mkdir -pv "$PREFIX"/var/run
-ln -sv usr/bin "$PREFIX"/bin
-ln -sv usr/sbin "$PREFIX"/sbin
+ln -sfv usr/bin "$PREFIX"/bin
+ln -sfv usr/sbin "$PREFIX"/sbin
 install -dv -m 0750 "$PREFIX"/root
 install -dv -m 1777 "$PREFIX"/tmp
 
