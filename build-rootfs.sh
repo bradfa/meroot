@@ -9,7 +9,7 @@ set -ex
 
 BUSYBOX_VERSION=1.23.1
 MAKE_VERSION=4.1
-GMP_VERSION=6.0.0a
+GMP_VERSION=6.0.0
 MPFR_VERSION=3.1.2
 MPC_VERSION=1.0.2
 M4_VERSION=1.4.17
@@ -83,6 +83,16 @@ fi
 OLDPREFIX=$PREFIX
 PREFIX=$PREFIX/usr
 
+# Use musl-cross cross compiler
+CC=$CC_PREFIX/bin/$TRIPLE-gcc
+CXX=$CC_PREFIX/bin/$TRIPLE-g++
+AR=$CC_PREFIX/bin/$TRIPLE-ar
+AS=$CC_PREFIX/bin/$TRIPLE-as
+LD=$CC_PREFIX/bin/$TRIPLE-ld
+RANLIB=$CC_PREFIX/bin/$TRIPLE-ranlib
+READELF=$CC_PREFIX/bin/$TRIPLE-readelf
+STRIP=$CC_PREFIX/bin/$TRIPLE-strip
+
 # Linux headers
 fetchextract $LINUX_HEADERS_URL
 LINUX_HEADERS_DIR=$(stripfileext $(basename $LINUX_HEADERS_URL))
@@ -102,3 +112,18 @@ then
     touch installedheaders
     )
 fi
+
+# GMP (static linked)
+fetchextract http://ftpmirror.gnu.org/gmp/ gmp-$GMP_VERSION .tar.bz2
+buildinstall '' gmp-$GMP_VERSION --target=$TRIPLE --host=$TRIPLE \
+	--disable-shared --with-pic
+
+# MPFR (static linked)
+fetchextract http://ftp.gnu.org/gnu/mpfr/ mpfr-$MPFR_VERSION .tar.bz2
+buildinstall '' mpfr-$MPFR_VERSION --target=$TRIPLE --host=$TRIPLE \
+	--disable-shared --with-pic --with-gmp=$PREFIX
+
+# MPC (static linked)
+fetchextract http://ftp.gnu.org/gnu/mpc/ mpc-$MPC_VERSION .tar.gz
+buildinstall '' mpc-$MPC_VERSION --target=$TRIPLE --host=$TRIPLE \
+	--disable-shared --with-pic --with-gmp=$PREFIX --with-mpfr=$PREFIX
