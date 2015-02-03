@@ -75,3 +75,22 @@ then
 	)
 fi
 
+# Linux headers
+fetchextract $LINUX_HEADERS_URL
+LINUX_HEADERS_DIR=$(stripfileext $(basename $LINUX_HEADERS_URL))
+if [ ! -e $LINUX_HEADERS_DIR/configured ]
+then
+    (
+    cd $LINUX_HEADERS_DIR
+    make $LINUX_DEFCONFIG ARCH=$LINUX_ARCH
+    touch configured
+    )
+fi
+if [ ! -e $LINUX_HEADERS_DIR/installedheaders ]
+then
+    (
+    cd $LINUX_HEADERS_DIR
+    make headers_install ARCH=$LINUX_ARCH INSTALL_HDR_PATH="$PREFIX/usr"
+    touch installedheaders
+    )
+fi
