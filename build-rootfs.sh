@@ -147,3 +147,8 @@ MAKEINSTALLFLAGS=$OLDMAKEINSTALLFLAGS
 fetchextract http://ftp.gnu.org/gnu/make/ make-$MAKE_VERSION .tar.bz2
 buildinstall '' make-$MAKE_VERSION CFLAGS="-static" LDFLAGS="-static" \
 	--target=$TRIPLE --host=$TRIPLE --without-guile --disable-nls
+
+# m4 (static linked)
+fetchextract http://ftp.gnu.org/gnu/m4/ m4-$M4_VERSION .tar.bz2
+buildinstall '' m4-$M4_VERSION LDFLAGS="-static" \
+	--target=$TRIPLE --host=$TRIPLE
