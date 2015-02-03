@@ -21,3 +21,4 @@ Use [musl-cross][musl-cross] and then expand on it just like in [CLFS][clfs] and
 3. Build a cross compiler with `./build-cross.sh` (just uses musl-cross)
 4. Build a root file system with `./build-rootfs.sh`
 5. Chroot into the rootfs or setup a bootloader and kernel to boot into it
+6. Build musl using `./configure --prefix=/ --includedir=/usr/include && make && make install`
