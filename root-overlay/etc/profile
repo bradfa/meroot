@@ -1,10 +1,10 @@
 # /etc/profile
 
 # Set the initial path
-export PATH=/bin:/usr/bin
+export PATH=/usr/pkg/bin:/bin:/usr/bin
 
 if [ `id -u` -eq 0 ] ; then
-        PATH=/bin:/sbin:/usr/bin:/usr/sbin
+        PATH=/usr/pkg/sbin:/sbin:/usr/sbin:$PATH
         unset HISTFILE
 fi
 
