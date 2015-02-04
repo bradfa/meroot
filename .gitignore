@@ -1,0 +1,12 @@
+busybox-*
+make-*
+linux-*
+kernel-headers-*
+m4-*
+mpc-*
+gmp-*
+mpfr-*
+binutils-*
+gcc-*
+tarballs/*tar*
+*.swp
