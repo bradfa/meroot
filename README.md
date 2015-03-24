@@ -16,11 +16,14 @@ Use [musl-cross][musl-cross] and then expand on it just like in [CLFS][clfs] and
 
 ## Instructions
 
-1. Clean with `./clean.sh`
-2. Configure for your desires by editing `config.sh`
-3. Build a cross compiler with `./build-cross.sh` (just uses musl-cross)
-4. Build a root file system with `./build-rootfs.sh`
-5. Chroot into the rootfs or setup a bootloader and kernel to boot into it
-6. Build musl using `./configure --prefix=/ --includedir=/usr/include && make && make install`
-7. Fetch a pkgsrc tarball and bootstrap it
-8. Attempt to build packages from pkgsrc using bmake
+1. Clone this repo to your machine `git clone https://github.com/bradfa/meroot`
+2. Go into the meroot directory `cd meroot`
+3. Get the musl-cross git submodule and update it `git submodule init && git submodule update`
+4. Clean with `./clean.sh`
+5. Configure for your desires by editing `config.sh`
+6. Build a cross compiler with `./build-cross.sh` (just uses musl-cross)
+7. Build a root file system with `./build-rootfs.sh`
+8. Chroot into the rootfs or setup a bootloader and kernel to boot into it
+9. Build musl using `./configure --prefix=/ --includedir=/usr/include && make && make install`
+10. Fetch a pkgsrc tarball and bootstrap it
+11. Attempt to build packages from pkgsrc using bmake
